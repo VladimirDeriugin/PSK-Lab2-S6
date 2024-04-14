@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Lab2</title>
+    <h:outputStylesheet name="css/styles.css"/>
+</h:head>
+
+<h:body>
+    <h:form>
+        <h:outputLabel for="name" value="Tournament Name:" />
+        <h:inputText id="name" value="#{tournaments.tournamentToCreate.name}" required="true" />
+
+        <h:outputLabel for="prizePool" value="Prize Pool:" />
+        <h:inputText id="prizePool" value="#{tournaments.tournamentToCreate.prizePool}" required="true" />
+
+        <h:commandButton value="Create Tournament" action="#{tournaments.createTournament}" />
+
+        <h:dataTable value="#{tournaments.allTournaments}" var="tournament">
+            <h:column>
+                <f:facet name="header">Tournament Name</f:facet>
+                <h:link outcome="tournamentDescription?tournamentID=#{tournament.id}" value="#{tournament.name}">
+                    <f:param name="id" value="#{tournament.id}" />
+                </h:link>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Prize Pool</f:facet>
+                #{tournament.prizePool}
+            </h:column>
+        </h:dataTable>
+        <h:link outcome="index" value="Back to main page index"/>
+    </h:form>
+</h:body>
+
+</html>

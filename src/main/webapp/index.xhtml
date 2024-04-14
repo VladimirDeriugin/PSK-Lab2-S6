@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head>
+    <title>Lab2</title>
+    <h:outputStylesheet name="css/styles.css"/>
+</h:head>
+<h:body>
+    <h2>Teams:</h2>
+    <ol>
+        <ui:repeat value="#{teams.allTeams}" var="team">
+            <li><h:link value="#{team.name}" outcome="team?teamId=#{team.id}" /></li>
+            <ui:repeat value="#{team.tournaments}" var="tournament">
+                #{tournament.name}
+            </ui:repeat>
+        </ui:repeat>
+    </ol>
+    <h3>Add a new team: </h3>
+    <h:form>
+        <h:inputText value="#{teams.teamToCreate.name}" required="true" />
+        <h:selectManyCheckbox id="chooseTournaments" value="#{teams.teamToCreate.tournaments}">
+            <f:selectItems value="#{tournaments.allTournaments}" var="tournament" itemValue="#{tournament}" itemLabel="#{tournament.name}"/>
+        </h:selectManyCheckbox>
+
+        <h:commandButton value="Add new team" actionListener="#{teams.createTeam}" class="commandButton"/>
+    </h:form>
+    <h2><h:link outcome="tournament.xhtml" value="Tournaments"/></h2>
+    <h:link outcome="myBatis/teams" value="MyBatis implementation"/>
+</h:body>
+</html>

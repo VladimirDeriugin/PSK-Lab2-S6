@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Lab2</title>
+    <h:outputStylesheet name="css/styles.css"/>
+</h:head>
+
+<h:body>
+    <h:outputText value="Tournament: #{tournamentDescription.tournament.name}" />
+    <h:dataTable value="#{tournamentDescription.tournament.teams}" var="team">
+        <h:column>
+            <f:facet name="header">Team Name</f:facet>
+            #{team.name}
+        </h:column>
+    </h:dataTable>
+
+    <h:dataTable value="#{tournamentDescription.nonParticipatingTeams}" var="team">
+        <h:column>
+            <f:facet name="header">Non-Participating Team Name</f:facet>
+            #{team.name}
+        </h:column>
+    </h:dataTable>
+</h:body>
+
+</html>

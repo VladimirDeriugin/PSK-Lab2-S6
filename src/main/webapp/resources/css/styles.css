@@ -1,0 +1,53 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f4f4f4, #ddd);
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+ol {
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+li {
+    line-height: 2;
+    transition: all 0.3s ease;
+}
+
+
+h:link, h:visited {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+
+h:form {
+    margin: 20px 0;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.commandButton {
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.commandButton:hover {
+    background-color: #ff4500;
+}

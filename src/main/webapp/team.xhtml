@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Lab2</title>
+    <h:outputStylesheet name="css/styles.css"/>
+</h:head>
+<h:body>
+    <h2>Players playing in #{playersForTeam.team.name} team:</h2>
+    <h3>Number of members: #{playersForTeam.team.numberOfMembers}</h3>
+    <h3>Team's Id: #{playersForTeam.team.id}</h3>
+    <ol>
+        <ui:repeat value="#{playersForTeam.team.players}" var="player">
+            <li>
+                <h:link value="#{player.fullName}" outcome="playerInfo?playerId=#{player.id}" />
+                <h:form>
+                    <h:commandButton value="Delete player" action="#{playersForTeam.deletePlayer(player.id)}">
+                        <f:param name="teamId" value="#{playersForTeam.team.id}" />
+                    </h:commandButton>
+                </h:form>
+            </li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:inputText a:placeholder="name" value="#{playersForTeam.playerToCreate.fullName}" required="true" />
+        <h:commandButton value="Add player to the team"
+                         actionListener="#{playersForTeam.createPlayer}"
+                         action="#{'team?faces-redirect=true&amp;teamId='.concat(playersForTeam.team.id)}">
+            <f:param name="teamId" value="#{playersForTeam.team.id}" />
+        </h:commandButton>
+    </h:form>
+    <h:link outcome="index" value="Back to teams page"/>
+</h:body>
+</html>
