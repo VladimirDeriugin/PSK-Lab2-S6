@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter @Setter
 @Model
@@ -44,5 +45,11 @@ public class Tournaments {
     
     private void loadAllTournaments(){
         this.allTournaments = tournamentsDAO.loadAll();
+    }
+    
+    public List<Tournament> getTournamentsNotParticipating(Team team) {
+        return allTournaments.stream()
+                .filter(tournament -> !tournament.getTeams().contains(team))
+                .collect(Collectors.toList());
     }
 }

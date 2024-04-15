@@ -17,7 +17,6 @@ import java.util.Objects;
 public class Team {
     
     public Team(){
-    
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

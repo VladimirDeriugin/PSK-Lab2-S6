@@ -26,9 +26,19 @@
         </ui:repeat>
     </ol>
     <h:form>
-        <h:inputText a:placeholder="name" value="#{playersForTeam.playerToCreate.fullName}" required="true" />
+        <h:inputText id="fullName" value="#{playersForTeam.playerToCreate.fullName}" a:placeholder="Full name"/>
         <h:commandButton value="Add player to the team"
                          actionListener="#{playersForTeam.createPlayer}"
+                         action="#{'team?faces-redirect=true&amp;teamId='.concat(playersForTeam.team.id)}">
+            <f:param name="teamId" value="#{playersForTeam.team.id}" />
+        </h:commandButton>
+    </h:form>
+    <h:form>
+        <h:selectManyCheckbox id="chooseTournamentsNotParticipating" value="#{playersForTeam.selectedTournaments}">
+            <f:selectItems value="#{tournaments.getTournamentsNotParticipating(playersForTeam.team)}" var="tournament" itemValue="#{tournament}" itemLabel="#{tournament.name}"/>
+        </h:selectManyCheckbox>
+        <h:commandButton value="Assign tournaments to the team"
+                         actionListener="#{playersForTeam.assignTournaments}"
                          action="#{'team?faces-redirect=true&amp;teamId='.concat(playersForTeam.team.id)}">
             <f:param name="teamId" value="#{playersForTeam.team.id}" />
         </h:commandButton>
