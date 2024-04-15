@@ -15,7 +15,10 @@
         <ui:repeat value="#{teams.allTeams}" var="team">
             <li><h:link value="#{team.name}" outcome="team?teamId=#{team.id}" /></li>
             <ui:repeat value="#{team.tournaments}" var="tournament">
-                #{tournament.name}
+                <h:link value="#{tournament.name}" outcome="tournament?tournamentId=#{tournament.id}" />
+                <h:form>
+                    <h:commandButton value="Remove" actionListener="#{teams.removeTournamentFromTeam(tournament, team)}" />
+                </h:form>
             </ui:repeat>
         </ui:repeat>
     </ol>

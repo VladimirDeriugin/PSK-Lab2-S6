@@ -30,6 +30,11 @@ public class Tournaments {
         loadAllTournaments();
     }
     
+    @Transactional
+    public void removeTeamFromTournament(Team team, Tournament tournament) {
+        tournament.getTeams().remove(team);
+        tournamentsDAO.update(tournament);
+    }
     
     @Transactional
     public String createTournament(){

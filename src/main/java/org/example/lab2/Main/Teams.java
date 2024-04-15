@@ -2,6 +2,7 @@ package org.example.lab2.Main;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.lab2.entities.Tournament;
 import org.example.lab2.persistence.TeamsDAO;
 import org.example.lab2.entities.Team;
 
@@ -40,6 +41,12 @@ public class Teams {
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    @Transactional
+    public void removeTournamentFromTeam(Tournament tournament, Team team) {
+        team.getTournaments().remove(tournament);
+        teamsDAO.update(team);
     }
     
     private void loadAllTeams(){
