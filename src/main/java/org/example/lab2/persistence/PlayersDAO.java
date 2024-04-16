@@ -3,11 +3,12 @@ package org.example.lab2.persistence;
 import org.example.lab2.entities.Player;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-@ApplicationScoped
+@RequestScoped
 public class PlayersDAO {
     
     @Inject

@@ -13,7 +13,9 @@ import org.example.lab2.persistence.TournamentsDAO;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 
 @Model
 @Getter @Setter
+@ViewScoped
 public class PlayersForTeam implements Serializable {
     @Inject
     private TeamsDAO teamsDAO;
@@ -83,11 +86,22 @@ public class PlayersForTeam implements Serializable {
     
     @Transactional
     public void assignTournaments() {
+        List<Tournament> selectedTournaments = getNonParticipatingTournaments();
         for (Tournament tournament : selectedTournaments) {
             team.getTournaments().add(tournament);
             tournament.getTeams().add(team);
             tournamentDAO.update(tournament);
         }
         teamsDAO.update(team);
+    }
+    
+    @Transactional
+    public String changeTeamName() {
+        try {
+            teamsDAO.update(this.team);
+        } catch (OptimisticLockException e) {
+            return "/team.xhtml?faces-redirect=true&teamId="+this.team.getId()+"&error=optimistic-lock-exception&faces-redirect=true";
+        }
+        return "index.xhtml?faces-redirect=true";
     }
 }

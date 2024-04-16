@@ -11,6 +11,14 @@
 </h:head>
 <h:body>
     <h2>Players playing in #{playersForTeam.team.name} team:</h2>
+    <h:form>
+        <h:inputText id="newName" value="#{playersForTeam.team.name}" a:placeholder="New team name"/>
+        <h:commandButton value="Change team name"
+                         action="#{playersForTeam.changeTeamName()}">
+            <f:param name="teamId" value="#{playersForTeam.team.id}" />
+        </h:commandButton>
+        <h:outputText value="Value was already modified by other user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
+    </h:form>
     <h3>Number of members: #{playersForTeam.team.numberOfMembers}</h3>
     <h3>Team's Id: #{playersForTeam.team.id}</h3>
     <ol>

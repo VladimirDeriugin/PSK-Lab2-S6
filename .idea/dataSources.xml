@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="TournamentDB" uuid="aec7dcd3-f350-4834-90ee-c6e6c4923d90">
+    <data-source source="LOCAL" name="TournamentDB" uuid="bde16b61-43b2-4890-b495-beab6488001f">
       <driver-ref>h2.unified</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.h2.Driver</jdbc-driver>

@@ -21,9 +21,15 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Basic(optional = false)
     private String name;
+    @Basic
     private Integer numberOfMembers = 0;
+    @Basic
     private Integer score = 0;
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private int version;
     
     @OneToMany(mappedBy = "team")
     private List<Player> players;
@@ -42,7 +48,6 @@ public class Team {
     
     @Override
     public int hashCode() {
-        
         return Objects.hash(id);
     }
     

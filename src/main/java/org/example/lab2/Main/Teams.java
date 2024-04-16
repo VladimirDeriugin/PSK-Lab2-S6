@@ -2,6 +2,7 @@ package org.example.lab2.Main;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.lab2.alternative.GreetingService;
 import org.example.lab2.entities.Tournament;
 import org.example.lab2.persistence.TeamsDAO;
 import org.example.lab2.entities.Team;
@@ -17,6 +18,9 @@ import javax.transaction.Transactional;
 public class Teams {
     @Inject
     private TeamsDAO teamsDAO;
+    
+    @Inject
+    private GreetingService greetingService;
     
     private Team teamToCreate = new Team();
     
