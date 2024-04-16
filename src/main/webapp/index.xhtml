@@ -10,11 +10,14 @@
     <h:outputStylesheet name="css/styles.css"/>
 </h:head>
 <h:body>
-    <h:outputText value="#{greetingService.greet()}" />
+    <h:outputText value="#{teams.greetingService.greet()}" />
     <h2>Teams:</h2>
     <ol>
         <ui:repeat value="#{teams.allTeams}" var="team">
-            <li><h:link value="#{team.name} Score = #{team.score}"  outcome="team?teamId=#{team.id}" /></li>
+            <li><h:link value="#{team.name} Score = #{scoreGenerator.scoreGenerationStatus}"  outcome="team?teamId=#{team.id}" /></li>
+            <h:form>
+                <h:commandButton value="Generate team score?" disabled="#{scoreGenerator.scoreGenerationRunning}" action="#{scoreGenerator.generateScore()}"/>
+            </h:form>
             <ui:repeat value="#{team.tournaments}" var="tournament">
                 <h:link value="#{tournament.name}" outcome="tournament?tournamentId=#{tournament.id}" />
                 <h:form>

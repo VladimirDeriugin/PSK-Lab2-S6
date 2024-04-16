@@ -11,7 +11,7 @@ import java.util.List;
 
 @Setter
 @RequestScoped
-public class TeamsDAO {
+public class TeamsDAO implements TeamsDAOLocal{
     @Inject
     private EntityManager em;
     

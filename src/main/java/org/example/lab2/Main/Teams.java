@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 
 @Model
 @Getter @Setter
-public class Teams {
+public class Teams{
     @Inject
     private TeamsDAO teamsDAO;
     

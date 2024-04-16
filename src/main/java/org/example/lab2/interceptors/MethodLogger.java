@@ -9,8 +9,10 @@ import java.io.Serializable;
 @LoggedInvocation
 public class MethodLogger implements Serializable {
     @AroundInvoke
-    public Object logMethodInvocation(InvocationContext context) throws Exception {
-        System.out.println("Called method: " + context.getMethod().getName());
-        return context.proceed();
+    public Object logMethodInvocation(InvocationContext ctx) throws Exception {
+        String className = ctx.getMethod().getDeclaringClass().getName();
+        String methodName = ctx.getMethod().getName();
+        System.out.println("Entering method: " + className + "." + methodName);
+        return ctx.proceed();
     }
 }

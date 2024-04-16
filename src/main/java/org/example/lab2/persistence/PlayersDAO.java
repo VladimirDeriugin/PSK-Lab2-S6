@@ -1,6 +1,7 @@
 package org.example.lab2.persistence;
 
 import org.example.lab2.entities.Player;
+import org.example.lab2.entities.Team;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
@@ -30,5 +31,11 @@ public class PlayersDAO {
     public void delete(Player player) {
         player = em.merge(player);
         em.remove(player);
+    }
+    
+    public Team findTeamByName(String team) {
+        return em.createNamedQuery("Team.findByName", Team.class)
+                .setParameter("name", team)
+                .getSingleResult();
     }
 }

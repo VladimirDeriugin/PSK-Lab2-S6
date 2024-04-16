@@ -7,9 +7,13 @@
         bean-discovery-mode="all">
 
     <alternatives>
+        <class>org.example.lab2.async.LowScore</class>
         <class>org.example.lab2.alternative.LithuanianGreetingService</class>
     </alternatives>
     <interceptors>
         <class>org.example.lab2.interceptors.MethodLogger</class>
     </interceptors>
+    <decorators>
+        <class>org.example.lab2.decorator.CamelCaseDecorator</class>
+    </decorators>
 </beans>

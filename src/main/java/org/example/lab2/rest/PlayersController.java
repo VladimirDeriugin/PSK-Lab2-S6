@@ -43,9 +43,7 @@ public class PlayersController {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response update(
-            @PathParam("id") final Integer playerId,
-            PlayerDTO playerData) {
+    public Response update(@PathParam("id") final Integer playerId, PlayerDTO playerData) {
         try {
             Player existingPlayer = playersDAO.findOne(playerId);
             if (existingPlayer == null) {
@@ -57,6 +55,30 @@ public class PlayersController {
         } catch (OptimisticLockException ole) {
             return Response.status(Response.Status.CONFLICT).build();
         }
+    }
+    
+    @Path("/create")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response create(PlayerDTO playerData) {
+        Player newPlayer = new Player();
+        newPlayer.setFullName(playerData.getFullName());
+        newPlayer.setTeam(playersDAO.findTeamByName(playerData.getTeam()));
+        playersDAO.persist(newPlayer);
+        return Response.ok().build();
+    }
+    
+    @Path("/{id}")
+    @DELETE
+    @Transactional
+    public Response delete(@PathParam("id") final Integer playerId) {
+        Player existingPlayer = playersDAO.findOne(playerId);
+        if (existingPlayer == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        playersDAO.delete(existingPlayer);
+        return Response.ok().build();
     }
 }
 
